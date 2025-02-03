@@ -30,7 +30,7 @@ def preprocess_image(image: pil_image) -> pil_image:
         raise
 
 
-def ocr_image(image_file):
+def ocr_image(image_file: bytes) -> str:
     """ 
     Extract text from an image (JPG, PNG, JPEG) 
 
@@ -46,7 +46,7 @@ def ocr_image(image_file):
     return text
 
 
-def ocr_pdf(pdf_bytes):
+def ocr_pdf(pdf_bytes: bytes) -> str:
     """
     Extract text from a PDF by converting it to images first 
 
@@ -60,7 +60,7 @@ def ocr_pdf(pdf_bytes):
     return "\n".join([pytesseract.image_to_string(preprocess_image(img)) for img in images])
 
 
-def ocr_docx(docx_bytes):
+def ocr_docx(docx_bytes: bytes) -> str:
     """
     Extract text from a docx file
 
@@ -78,7 +78,7 @@ def ocr_docx(docx_bytes):
     return text
 
 
-def ocr_excel(excel_bytes, file_extension):
+def ocr_excel(excel_bytes: bytes, file_extension: str) -> str:
     """
     Extract text from both XLSX and XLS files based on extension
 
@@ -116,9 +116,9 @@ def ocr_excel(excel_bytes, file_extension):
                             row_text += str(cell.value) + " "
                     text += row_text + "\n"
     return text
-  
-    
-def text_extractor(file_bytes, file_extension):
+
+
+def text_extractor(file_bytes: bytes, file_extension: str) -> str:
     """
     Determine the appropriate OCR function based on file type and extract text
 
