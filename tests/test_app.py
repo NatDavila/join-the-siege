@@ -1,5 +1,4 @@
 from io import BytesIO
-
 import pytest
 from src.app import app, allowed_file
 

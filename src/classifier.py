@@ -2,7 +2,6 @@ from werkzeug.datastructures import FileStorage
 import joblib
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 import sys
 import logging 
 from src.utils import text_extractor 
