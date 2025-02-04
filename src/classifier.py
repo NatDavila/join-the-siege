@@ -33,10 +33,14 @@ def extract_text_from_file(file: FileStorage) -> str:
     returns:
         extracted_text: The text extracted from the file
     """
-    file_bytes = file.read()
-    file_extension = file.filename.split('.')[-1].lower()
+    try:
+        file_bytes = file.read()
+        file_extension = file.filename.split('.')[-1].lower()
+        extracted_text = text_extractor(file_bytes, file_extension) 
+    except Exception as e:
+        logging.error(f"Error extracting text: {e}")
+        return "No text extracted"
 
-    extracted_text = text_extractor(file_bytes, file_extension)
     return extracted_text
 
 
@@ -50,7 +54,16 @@ def classify_file(file: FileStorage) -> str:
     returns:   
         prediction: The predicted class of the file, either license, bank statement, or invoice
     """
-    extracted_text = extract_text_from_file(file)
+    try:
+        extracted_text = extract_text_from_file(file)
+    except Exception as e:
+        logging.error(f"Error processing: {e}")
+        return "Invalid file type or format"
 
-    prediction = model.predict([extracted_text]) 
+    try:
+        prediction = model.predict([extracted_text]) 
+    except Exception as e:
+        logging.error(f"Error classifying: {e}")
+        return "Failed to classify"
+    
     return prediction[0] 
