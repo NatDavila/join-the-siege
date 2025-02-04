@@ -48,9 +48,9 @@ def classify_file(file: FileStorage) -> str:
         file: The file to classify
 
     returns:   
-        prediction: The predicted class of the file
+        prediction: The predicted class of the file, either license, bank statement, or invoice
     """
     extracted_text = extract_text_from_file(file)
-    
+
     prediction = model.predict([extracted_text]) 
     return prediction[0] 
