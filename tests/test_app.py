@@ -14,8 +14,12 @@ def client():
     ("file.pdf", True),
     ("file.png", True),
     ("file.jpg", True),
-    ("file.txt", False),
-    ("file", False),
+    ("file.jpeg", True),
+    ("file.txt", True),
+    ("file.docx", True),
+    ("file.xlsx", True),
+    ("file.xls", True),
+    ("file", False)
 ])
 def test_allowed_file(filename, expected):
     assert allowed_file(filename) == expected
