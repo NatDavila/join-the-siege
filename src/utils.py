@@ -23,6 +23,7 @@ def preprocess_image(image: pil_image) -> pil_image:
     """
     try:
         gray = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2GRAY)
+        gray = np.uint8(gray)
         _, thresh = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         return Image.fromarray(thresh)
     except Exception as e:
